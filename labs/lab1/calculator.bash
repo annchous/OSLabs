@@ -1,4 +1,16 @@
 #!/bin/bash
+
+show-help()
+{
+echo "Calculator Commands"
+echo "--------------------"
+echo "- sum value1 value2: get sum value1 + value2"
+echo "- sub value1 value2: get subtraction value1 - value2"
+echo "- mul value1 value2: get multiplication value1 * value2"
+echo "- div value1 value2: get division value1 / value2"
+echo "--------------------"
+}
+
 case "$1" in
 	"sum" )
 	let sum=$(( $2 + $3 ))
@@ -21,16 +33,5 @@ case "$1" in
 	show-help
 	;;
 esac
-
-show-help()
-{
-echo "Calculator Commands"
-echo "--------------------"
-echo "- sum value1 value2: get sum value1 + value2"
-echo "- sub value1 value2: get subtraction value1 - value2"
-echo "- mul value1 value2: get multiplication value1 * value2"
-echo "- div value1 value2: get division value1 / value2"
-echo "--------------------"
-}
 
 exit 0
