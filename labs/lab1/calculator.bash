@@ -1,6 +1,6 @@
 #!/bin/bash
 
-show-help()
+show_help() 
 {
 echo "Calculator Commands"
 echo "--------------------"
@@ -30,7 +30,7 @@ case "$1" in
 	;;
 	* )
 	echo "Wrong parameter!"
-	show-help
+	show_help
 	;;
 esac
 
