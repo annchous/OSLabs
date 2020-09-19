@@ -53,6 +53,17 @@ shift
 sh ./strlen.bash $*
 }
 
+ExitFunc()
+{
+if [[ $1 -ne 1 ]] && [[ $1 -ne 2 ]]
+then
+	ParamsAmountError
+	exit 1
+fi
+sh ./exit.bash $2
+echo -e "\e[32mProgram finished with exit code $?.\e[0m"
+}
+
 # MAIN PART
 
 if [[ $# -lt 1 ]]
@@ -76,13 +87,7 @@ else
 	StrlenFunc $args $*
 	;;
 	"exit" )
-		if [[ $# -eq 2 ]]
-		then
-			sh ./exit.bash $2
-		else
-			sh ./exit.bash
-		fi
-		echo "Program finished with exit code $?"
+	ExitFunc $# $2
 	;;
 	"help" )
 		sh ./help.bash
