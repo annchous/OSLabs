@@ -38,14 +38,51 @@ echo -e "\e[31mDivision by zero is not possible!\e[0m"
 exit 1
 }
 
+BothInteger()
+{
+if [[ $1 =~ ^[0-9]+?$ ]] && [[ $2 =~ ^[0-9]+?$ ]]
+then
+	return 0
+else
+	return 1
+fi
+}
+
+SumFunc()
+{
+if BothInteger $1 $2
+then
+	res=$(( $1 + $2 ))
+	echo $res
+	return 0
+else
+	res=$( echo "$1 + $2" | bc -l )
+	echo $res
+	return 0
+fi
+}
+
+SubFunc()
+{
+if BothInteger $1 $2
+then
+	res=$(( $1 - $2 ))
+	echo $res
+	return 0
+else
+	res=$( echo "$1 - $2" | bc -l )
+	echo $res
+	return 0
+fi
+}
+
+
 case "$1" in
 	"sum" )
-	sum=$(( $2 + $3 ))
-	echo $sum
+	SumFunc $2 $3
 	;;
 	"sub" )
-	sub=$(( $2 - $3 ))
-	echo $sub
+	SubFunc $2 $3
 	;;
 	"mul" )
 	mul=$(( $2 * $3 ))
@@ -56,7 +93,7 @@ case "$1" in
 	then
 		DivisionByZeroError
 	fi
-	if [[ $2 =~ ^[0-9]+?$ ]] && [[ $3 =~ ^[0-9]+?$ ]]
+	if BothInteger $2 $3
 	then
 	div=$(( $2 / $3 ))
 	echo $div
