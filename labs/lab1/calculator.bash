@@ -108,6 +108,15 @@ else
 fi
 }
 
+if ! [[ $2 =~ ^[0-9]+$ ]] || ! [[ $3 =~ ^[0-9]+$ ]]
+then
+	if ! [[ $2 =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]] || ! [[ $3 =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]]
+	then
+	echo -e "\e[31mWrong arguments! They should be two numbers!\e[0m"
+	exit 1
+	fi
+fi
+
 case "$1" in
 	"sum" )
 	SumFunc $2 $3
