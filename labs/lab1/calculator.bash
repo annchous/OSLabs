@@ -35,29 +35,35 @@ DivisionByZeroError()
 {
 echo -e "\e[36mAre you crazy, dude?\e[0m"
 echo -e "\e[31mDivision by zero is not possible!\e[0m"
-exit 0
+exit 1
 }
 
 case "$1" in
 	"sum" )
-	let sum=$(( $2 + $3 ))
+	sum=$(( $2 + $3 ))
 	echo $sum
 	;;
 	"sub" )
-	let sub=$(( $2 - $3 ))
+	sub=$(( $2 - $3 ))
 	echo $sub
 	;;
 	"mul" )
-	let mul=$(( $2 * $3 ))
+	mul=$(( $2 * $3 ))
 	echo $mul
 	;;
 	"div" )
-	if [[ $3 -eq 0 ]]
+	if [[ $3 =~ ^[+-]?[0]+([.][0]+)?$ ]]
 	then
 		DivisionByZeroError
 	fi
-	let div=$(( $2 / $3 ))
+	if [[ $2 =~ ^[0-9]+?$ ]] && [[ $3 =~ ^[0-9]+?$ ]]
+	then
+	div=$(( $2 / $3 ))
 	echo $div
+	else
+	div=$( echo "$2 / $3" | bc -l )
+	echo $div
+	fi
 	;;
 	* )
 	WrongCommand $1
