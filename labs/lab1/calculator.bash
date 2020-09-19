@@ -26,7 +26,7 @@ then
 	exit 0
 else
 	echo -e "\e[36mI don't understand you, dude! Try again...\e[0m"
-	exit 0
+	exit 1
 fi
 fi
 }
@@ -60,6 +60,7 @@ else
 	echo $res
 	return 0
 fi
+return 1
 }
 
 SubFunc()
@@ -74,6 +75,7 @@ else
 	echo $res
 	return 0
 fi
+return 1
 }
 
 MulFunc()
@@ -88,6 +90,7 @@ else
 	echo $res
 	return 0
 fi
+return 1
 }
 
 DivFunc()
@@ -106,6 +109,7 @@ else
 	echo $div
 	return 0
 fi
+return 1
 }
 
 if ! [[ $2 =~ ^[0-9]+$ ]] || ! [[ $3 =~ ^[0-9]+$ ]]
