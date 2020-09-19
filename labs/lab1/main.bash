@@ -86,6 +86,9 @@ else
 	shift
 	StrlenFunc $args $*
 	;;
+	"log" )
+	sh ./log.bash
+	;;
 	"exit" )
 	ExitFunc $# $2
 	;;
