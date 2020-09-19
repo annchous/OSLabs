@@ -64,10 +64,10 @@ else
 	sh ./calculator.bash $2 $3 $4
 	;;
 	"search" )
-		sh ./search.bash $2 $3
-		echo $?
+	sh ./search.bash $2 $3
 	;;
 	"reverse" )
+	CheckParamsAmount $# 3
 	sh ./reverse.bash $2 $3
 	;;
 	"strlen" )
