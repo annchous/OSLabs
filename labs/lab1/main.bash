@@ -67,6 +67,9 @@ else
 		sh ./search.bash $2 $3
 		echo $?
 	;;
+	"reverse" )
+	sh ./reverse.bash $2 $3
+	;;
 	"strlen" )
 	args=$#
 	shift
