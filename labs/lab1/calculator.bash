@@ -31,6 +31,13 @@ fi
 fi
 }
 
+DivisionByZeroError()
+{
+echo -e "\e[36mAre you crazy, dude?\e[0m"
+echo -e "\e[31mDivision by zero is not possible!\e[0m"
+exit 0
+}
+
 case "$1" in
 	"sum" )
 	let sum=$(( $2 + $3 ))
@@ -45,6 +52,10 @@ case "$1" in
 	echo $mul
 	;;
 	"div" )
+	if [[ $3 -eq 0 ]]
+	then
+		DivisionByZeroError
+	fi
 	let div=$(( $2 / $3 ))
 	echo $div
 	;;
