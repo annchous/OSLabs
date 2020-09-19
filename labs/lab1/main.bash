@@ -25,6 +25,34 @@ fi
 fi
 }
 
+CheckParamsAmount()
+{
+if [[ $1 -ne $2 ]]
+	then ParamsAmountError
+	echo "You entered $1 parameters but need $2."
+	exit 1
+fi
+}
+
+SearchFunc()
+{
+if [[ $# -ne 2 ]]
+then
+	ParamsAmountError
+	exit 1
+fi
+}
+
+StrlenFunc()
+{
+if [[ $1 -lt 2 ]]
+then
+	CheckParamsAmount $1 2
+fi
+shift
+sh ./strlen.bash $*
+}
+
 # MAIN PART
 
 if [[ $# -lt 1 ]]
@@ -32,21 +60,17 @@ if [[ $# -lt 1 ]]
 else
 	case  "$1"  in
 	"calc" )
-		if [[ $# -ne 4 ]]
-			then
-			ParamsAmountError
-			echo "You entered $# parameters but need 4."
-		else
-			sh ./calculator.bash $2 $3 $4
-		fi
+	CheckParamsAmount $# 4
+	sh ./calculator.bash $2 $3 $4
 	;;
 	"search" )
 		sh ./search.bash $2 $3
 		echo $?
 	;;
 	"strlen" )
-		shift
-		sh ./strlen.bash $*
+	args=$#
+	shift
+	StrlenFunc $args $*
 	;;
 	"exit" )
 		if [[ $# -eq 2 ]]
