@@ -76,6 +76,37 @@ else
 fi
 }
 
+MulFunc()
+{
+if BothInteger $1 $2
+then
+	res=$(( $1 * $2 ))
+	echo $res
+	return 0
+else
+	res=$( echo "$1 * $2" | bc -l )
+	echo $res
+	return 0
+fi
+}
+
+DivFunc()
+{
+if [[ $2 =~ ^[+-]?[0]+([.][0]+)?$ ]]
+then
+	DivisionByZeroError
+fi
+if BothInteger $1 $2
+then
+	div=$(( $1 / $2 ))
+	echo $div
+	return 0
+else
+	div=$( echo "$1 / $2" | bc -l )
+	echo $div
+	return 0
+fi
+}
 
 case "$1" in
 	"sum" )
@@ -85,22 +116,10 @@ case "$1" in
 	SubFunc $2 $3
 	;;
 	"mul" )
-	mul=$(( $2 * $3 ))
-	echo $mul
+	MulFunc $2 $3
 	;;
 	"div" )
-	if [[ $3 =~ ^[+-]?[0]+([.][0]+)?$ ]]
-	then
-		DivisionByZeroError
-	fi
-	if BothInteger $2 $3
-	then
-	div=$(( $2 / $3 ))
-	echo $div
-	else
-	div=$( echo "$2 / $3" | bc -l )
-	echo $div
-	fi
+	DivFunc $2 $3
 	;;
 	* )
 	WrongCommand $1
