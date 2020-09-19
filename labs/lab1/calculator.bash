@@ -2,13 +2,33 @@
 
 show_help() 
 {
-echo "Calculator Commands"
-echo "--------------------"
-echo "- sum value1 value2: get sum value1 + value2"
-echo "- sub value1 value2: get subtraction value1 - value2"
-echo "- mul value1 value2: get multiplication value1 * value2"
-echo "- div value1 value2: get division value1 / value2"
-echo "--------------------"
+echo -e "\e[35mCalculator Commands"
+echo -e "--------------------"
+echo -e "- sum value1 value2: get sum value1 + value2"
+echo -e "- sub value1 value2: get subtraction value1 - value2"
+echo -e "- mul value1 value2: get multiplication value1 * value2"
+echo -e "- div value1 value2: get division value1 / value2"
+echo -e "--------------------\e[0m"
+}
+
+WrongCommand()
+{
+echo -e "\e[32mCommand $1 does not exist!\e[0m"
+echo -e "\e[36mWould you like to get a Calculator help list? (y/n)\e[0m"
+read ans
+if [[ "$ans" = "y" ]]
+then
+	show_help
+	exit 0
+else if [[ "$ans" == "n" ]]
+then
+	echo -e "\e[36mOkay, goodbye!\e[0m"
+	exit 0
+else
+	echo -e "\e[36mI don't understand you, dude! Try again...\e[0m"
+	exit 0
+fi
+fi
 }
 
 case "$1" in
@@ -29,8 +49,7 @@ case "$1" in
 	echo $div
 	;;
 	* )
-	echo "Wrong parameter!"
-	show_help
+	WrongCommand $1
 	;;
 esac
 
