@@ -93,13 +93,13 @@ else
 	ExitFunc $# $2
 	;;
 	"help" )
-		sh ./help.bash
+	sh ./help.bash
 	;;
 	"interactive" )
 	sh ./interactive.bash
 	;;
 	* )
-		WrongCommand $1
+	WrongCommand $1
 	esac
 fi
 
