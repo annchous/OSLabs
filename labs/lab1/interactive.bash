@@ -60,7 +60,12 @@ Exit()
 {
 echo -e "\e[36mPlease, enter an exit code (default = 0)\e[0m"
 read ecode
-sh ./exit.bash $ecode
+if [[ -n $ecode ]]
+then
+	exit $ecode
+else
+	exit 0
+fi
 }
 
 while true
