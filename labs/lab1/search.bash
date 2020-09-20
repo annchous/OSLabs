@@ -13,6 +13,6 @@ then
 	exit 1
 fi
 
-grep -r $2 $1
+grep -r $2 $1 2> /dev/null 1>&1
 
 exit 0
