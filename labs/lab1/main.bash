@@ -95,6 +95,9 @@ else
 	"help" )
 		sh ./help.bash
 	;;
+	"interactive" )
+	sh ./interactive.bash
+	;;
 	* )
 		WrongCommand $1
 	esac

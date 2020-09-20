@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ $# -ne 2 ]]
+then
+	echo -e "\e[31mNot enough arguments!\e[0m"
+	exit 1
+fi
+
 if ! [[ -e $1 ]]
 then
 	echo -e "\e[31mSource file $1 does not exist!\e[0m"
