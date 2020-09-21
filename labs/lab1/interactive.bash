@@ -62,9 +62,15 @@ echo -e "\e[36mPlease, enter an exit code (default = 0)\e[0m"
 read ecode
 if [[ -n $ecode ]]
 then
-	exit $ecode
+	if ! [[ $ecode =~ ^[-]?[0-9]+?$ ]]
+then
+		echo -e "\e[31mArgument $ecode is not an integer number!\e[0m"
+	exit 1
+	else
+		exec sh ./exit.bash $ecode
+	fi
 else
-	exit 0
+	exec sh ./exit.bash 0
 fi
 }
 

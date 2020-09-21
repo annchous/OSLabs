@@ -15,7 +15,7 @@ fi
 if ! [[ -e $2 ]]
 then
 	echo -e "\e[31mFile $2 does not exist!\e[0m"
-	echo -e "\e[36mFile $2 will be created in $PWD.\e[0m"
+	echo -e "\e[36mFile $2 will be created.\e[0m"
 	touch $2 &> /dev/null
 	if [[ -e $2 ]]
 		then

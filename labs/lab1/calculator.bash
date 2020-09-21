@@ -112,6 +112,12 @@ fi
 return 1
 }
 
+if [[ $# -ne 3 ]]
+then
+	echo -e "\e[31mWrong parameters amount!\e[0m\nYou entered $# parameter(s) but need 3.\e[0m"
+	exit 1
+fi
+
 if ! [[ $2 =~ ^[0-9]+$ ]] || ! [[ $3 =~ ^[0-9]+$ ]]
 then
 	if ! [[ $2 =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]] || ! [[ $3 =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]]

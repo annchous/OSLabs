@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ $# -ne 2 ]]
+then
+	echo -e "\e[31mWrong parameters amount!\e[0m\nYou entered $# parameter(s) but need 2."
+	exit 1
+fi
+
 if ! [[ -e $1 ]]
 then
 	echo -e "\e[31mDirectory $1 does not exist!\e[0m"

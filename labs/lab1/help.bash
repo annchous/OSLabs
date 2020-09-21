@@ -1,6 +1,5 @@
 #!/bin/bash
 
-echo "You see this because you did something wrong :D"
 echo "-----------------------------------------------"
 echo -e "\033[43m______________________HELP____________________\e[0m"
 echo "There are 8 commands at your desposal:	     "

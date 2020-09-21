@@ -29,9 +29,14 @@ CheckParamsAmount()
 {
 if [[ $1 -ne $2 ]]
 	then ParamsAmountError
-	echo "You entered $1 parameters but need $2."
+	echo "You entered $1 parameter(s) but need $2."
 	exit 1
 fi
+}
+
+CalcFunc()
+{
+
 }
 
 SearchFunc()
@@ -55,12 +60,18 @@ sh ./strlen.bash $*
 
 ExitFunc()
 {
+if ! [[ $2 =~ ^[0-9]+?$ ]]
+then
+	echo -e "\e[31mArgument $2 is not an integer number!\e[0m"
+	exit 1
+fi
+
 if [[ $1 -ne 1 ]] && [[ $1 -ne 2 ]]
 then
 	ParamsAmountError
 	exit 1
 fi
-sh ./exit.bash $2
+exec sh ./exit.bash $2
 echo -e "\e[32mProgram finished with exit code $?.\e[0m"
 }
 
@@ -75,6 +86,7 @@ else
 	sh ./calculator.bash $2 $3 $4
 	;;
 	"search" )
+	CheckParamsAmount $# 3
 	sh ./search.bash $2 $3
 	;;
 	"reverse" )
@@ -96,7 +108,7 @@ else
 	sh ./help.bash
 	;;
 	"interactive" )
-	sh ./interactive.bash
+	exec sh ./interactive.bash
 	;;
 	* )
 	WrongCommand $1
