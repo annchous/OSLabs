@@ -34,4 +34,5 @@ echo "		1. exit code			     "
 echo -e "7. \e[44minteractive:\e[0m launches interactive mode      "
 echo -e "8. \e[44mhelp:\e[0m prints help info			     "
 echo "_______________________________________________"
-
+echo -e "\e[36m0 - everything is ok"
+echo -e "1 - something went wrong\e[0m"
