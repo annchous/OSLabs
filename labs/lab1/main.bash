@@ -34,29 +34,35 @@ if [[ $1 -ne $2 ]]
 fi
 }
 
-CalcFunc()
+NoAccess()
 {
-if ! [[ $2 =~ ^[-]?[0-9]+$ ]] || ! [[ $3 =~ ^[-]?[0-9]+$ ]]
-then
-	if ! [[ $2 =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]] || ! [[ $3 =~ ^[+-]?[0-9]+([.][0-9]+)?$ ]]
-	then
-	echo -e "\e[31mWrong arguments! They should be two numbers!\e[0m"
-	exit 1
-	fi
-fi
+echo -e "\e[31mCannot access script!\e[0m"
+exit 1
 }
 
 SearchFunc()
 {
+if ! [[ -e ./search.bash ]]
+then
+	NoAccess
+fi
+
 if [[ $# -ne 2 ]]
 then
 	ParamsAmountError
 	exit 1
 fi
+
+sh ./search.bash $1 $2
 }
 
 StrlenFunc()
 {
+if ! [[ -e ./strlen.bash ]]
+then
+	NoAccess
+fi
+
 if [[ $1 -lt 2 ]]
 then
 	CheckParamsAmount $1 2
@@ -65,8 +71,22 @@ shift
 sh ./strlen.bash $*
 }
 
+ReverseFunc()
+{
+if ! [[ -e ./reverse.bash ]]
+then
+	NoAccess
+fi
+sh ./reverse.bash $1 $2
+}
+
 ExitFunc()
 {
+if ! [[ -e ./exit.bash ]]
+then
+	NoAccess
+fi
+
 if ! [[ $2 =~ ^[0-9]+?$ ]]
 then
 	echo -e "\e[31mArgument $2 is not an integer number!\e[0m"
@@ -90,15 +110,19 @@ else
 	case  "$1"  in
 	"calc" )
 	CheckParamsAmount $# 4
+	if ! [[ -e ./calculator.bash ]]
+	then
+		NoAccess
+	fi
 	sh ./calculator.bash $2 $3 $4
 	;;
 	"search" )
 	CheckParamsAmount $# 3
-	sh ./search.bash $2 $3
+	SearchFunc $2 $3
 	;;
 	"reverse" )
 	CheckParamsAmount $# 3
-	sh ./reverse.bash $2 $3
+	ReverseFunc $2 $3
 	;;
 	"strlen" )
 	args=$#
@@ -106,15 +130,27 @@ else
 	StrlenFunc $args $*
 	;;
 	"log" )
+	if ! [[ -e ./log.bash ]]
+	then
+		NoAccess
+	fi
 	sh ./log.bash
 	;;
 	"exit" )
 	ExitFunc $# $2
 	;;
 	"help" )
+	if ! [[ -e ./exit.bash ]]
+	then
+		NoAccess
+	fi
 	sh ./help.bash
 	;;
 	"interactive" )
+	if ! [[ -e ./interactive.bash ]]
+	then
+		NoAccess
+	fi
 	exec sh ./interactive.bash
 	;;
 	* )

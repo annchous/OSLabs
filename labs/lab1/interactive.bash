@@ -16,8 +16,18 @@ echo -e "h. interactive"
 echo -e "Press q to quit.\e[0m"
 }
 
+NoAccess()
+{
+echo -e "\e[31mCannot access script!\e[0m"
+exit 1
+}
+
 Calc()
 {
+if ! [[ -e ./calculator.bash ]]
+then
+	NoAccess
+fi
 echo -e "\e[36mPlease, enter 3 arguments:"
 echo -e "1. sum/sub/mul/div option"
 echo -e "2. value 1"
@@ -29,6 +39,10 @@ sh ./calculator.bash $option $val1 $val2
 
 Search()
 {
+if ! [[ -e ./search.bash ]]
+then
+	NoAccess
+fi
 echo -e "\e[36mPlease, enter 2 arguments:"
 echo -e "1. directory"
 echo -e "2. regex"
@@ -39,6 +53,10 @@ sh ./search.bash $dir $regex
 
 Reverse()
 {
+if ! [[ -e ./reverse.bash ]]
+then
+	NoAccess
+fi
 echo -e "\e[36mPlease, enter 2 arguments:"
 echo -e "1. source file"
 echo -e "2. end file"
@@ -49,6 +67,10 @@ sh ./reverse.bash $sfile $efile
 
 Strlen()
 {
+if ! [[ -e ./strlen.bash ]]
+then
+	NoAccess
+fi
 echo -e "\e[36mPlease, enter 1 argument:"
 echo -e "1. string"
 echo -e "in format: string\e[0m"
@@ -58,6 +80,10 @@ sh ./strlen.bash $str
 
 Exit()
 {
+if ! [[ -e ./exit.bash ]]
+then
+	NoAccess
+fi
 echo -e "\e[36mPlease, enter an exit code (default = 0)\e[0m"
 read ecode
 if [[ -n $ecode ]]
@@ -92,15 +118,27 @@ do
 		Strlen
 	else if [[ $command = "e" ]] || [[ $command = "log" ]]
 	then
+		if ! [[ -e ./log.bash ]]
+		then
+			NoAccess
+		fi
 		sh ./log.bash
 	else if [[ $command = "f" ]] || [[ $command = "exit" ]]
 	then
 		Exit
 	else if [[ $command = "g" ]] || [[ $command = "help" ]]
 	then
+		if ! [[ -e ./help.bash ]]
+		then
+			NoAccess
+		fi
 		sh ./help.bash
 	else if [[ $command = "h" ]] || [[ $command = "interactive" ]]
 	then
+		if ! [[ -e ./interactive.bash ]]
+		then
+			NoAccess
+		fi
 		sh ./interactive.bash
 	else if [[ $command = "q" ]] || [[ $command = "quit" ]]
 	then
