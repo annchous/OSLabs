@@ -75,7 +75,13 @@ echo -e "\e[36mPlease, enter 1 argument:"
 echo -e "1. string"
 echo -e "in format: string\e[0m"
 read str
-sh ./strlen.bash $str
+eval "string=($str)"
+if [[ -z $str ]]
+then
+	sh ./strlen.bash
+else
+	sh ./strlen.bash "${string[0]}"
+fi
 }
 
 Exit()
