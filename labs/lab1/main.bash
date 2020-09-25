@@ -62,13 +62,8 @@ if ! [[ -e ./strlen.bash ]]
 then
 	NoAccess
 fi
-
-if [[ $1 -lt 2 ]]
-then
-	CheckParamsAmount $1 2
-fi
 shift
-sh ./strlen.bash $*
+sh ./strlen.bash "$@"
 }
 
 ReverseFunc()
@@ -125,9 +120,8 @@ else
 	ReverseFunc $2 $3
 	;;
 	"strlen" )
-	args=$#
-	shift
-	StrlenFunc $args $*
+#	sh ./strlen.bash "$@"
+	StrlenFunc "$@"
 	;;
 	"log" )
 	if ! [[ -e ./log.bash ]]
