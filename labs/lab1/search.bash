@@ -6,7 +6,7 @@ then
 	exit 1
 fi
 
-if ! [[ -e $1 ]]
+if ! [[ -e $1 ]] || ! [[ -d $1 ]]
 then
 	echo -e "\e[31mDirectory $1 does not exist!\e[0m"
 	exit 1
